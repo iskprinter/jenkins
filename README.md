@@ -12,17 +12,18 @@ CI/CD for all IskPrinter components
     helm install jenkins ./helm \
         --kube-context '<context>' \
         -n iskprinter \
-        --set jenkins.controller.jenkinsUrl='<jenkins-url>' \
-        --set jenkins.controller.jenkinsUriPrefix='<jenkins-uri-prefix>' \
         --set githubToken='<github-token>' \
-        --set host='<host>'
+        --set host='<host>' \
+        --set jenkins.controller.adminPassword='<admin-password>' \
+        --set jenkins.controller.jenkinsUriPrefix='<jenkins-uri-prefix>' \
+        --set jenkins.controller.jenkinsUrl='<jenkins-url>'
     ```
     Example values for local deployment:
-    * jenkins.controller.jenkinsUrl='http://localhost/jenkins'
-    * jenkins.controller.jenkinsUriPrefix='/jenkins'
     * host='localhost'
+    * jenkins.controller.jenkinsUriPrefix='/jenkins'
+    * jenkins.controller.jenkinsUrl='http://localhost/jenkins'
 
     Example values for cloud deployment:
-    * jenkins.controller.jenkinsUrl='https://iskprinter.com/jenkins'
-    * jenkins.controller.jenkinsUriPrefix='/jenkins'
     * host='iskprinter.com'
+    * jenkins.controller.jenkinsUriPrefix='/jenkins'
+    * jenkins.controller.jenkinsUrl='https://iskprinter.com/jenkins'
