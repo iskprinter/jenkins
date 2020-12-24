@@ -15,7 +15,7 @@ CI/CD for all IskPrinter components
         --set jenkins.controller.jenkinsUrl='<jenkins-url>' \
         --set jenkins.controller.jenkinsUriPrefix='<jenkins-uri-prefix>' \
         --set githubToken='<github-token>' \
-        --set host='iskprinter.com'
+        --set host='<host>'
     ```
     Example values for local deployment:
     * jenkins.controller.jenkinsUrl='http://localhost/jenkins'
