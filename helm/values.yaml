@@ -1,0 +1,22 @@
+jenkins:
+  controller:
+    # List of plugins to be install during Jenkins controller start
+    installPlugins:
+      - kubernetes:1.27.6
+      - workflow-aggregator:2.6
+      - configuration-as-code:1.46
+
+      # For GitHub integration
+      - blueocean:1.24.3
+
+  persistence:
+    enabled: true
+    volumes:
+      - name: jenkins-github
+        secret:
+          secretName: jenkins-github
+    mounts:
+      - name: jenkins-github
+        mountPath: /run/secrets/github_token
+        subPath: github_token
+        readOnly: true
