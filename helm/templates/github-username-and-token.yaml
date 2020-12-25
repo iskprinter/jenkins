@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  username: {{ required "Argument --set githubUsername='<github-username>' is required." .Values.githubUsername | b64enc }}
+  token: {{ required "Argument --set githubToken='<github-token>' is required." .Values.githubToken | b64enc }}
+kind: Secret
+metadata:
+  annotations:
+    "jenkins.io/credentials-description": "GitHub username and personal access token"
+    "jenkins.io/credentials-keybinding-username": "username"
+    "jenkins.io/credentials-keybinding-password" : "token"
+  labels:
+    "jenkins.io/credentials-type": "usernamePassword"
+  name: github-username-and-token
+type: Opaque
