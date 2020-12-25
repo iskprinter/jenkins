@@ -15,8 +15,8 @@ jenkins:
         # http://<jenkins_url>/reload-configuration-as-code endpoint to reapply config when changes to the configScripts are detected.
         enabled: false
     probes:
-      livenessProbe:
-        initialDelaySeconds: 90
+      startupProbe:
+        failureThreshold: 30
 
     JCasC:
       configScripts:
