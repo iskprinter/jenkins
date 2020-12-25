@@ -1,13 +1,12 @@
 jenkins:
   controller:
-    # List of plugins to be install during Jenkins controller start
     installPlugins:
       - kubernetes:1.27.6
       - workflow-aggregator:2.6
       - configuration-as-code:1.46
       - job-dsl:1.77
       # For GitHub integration
-      - blueocean:1.24.3
+      - blueocean:1.24.3  # For GitHub integration
     sidecars:
       configAutoReload:
         # If enabled: true, Jenkins Configuration as Code will be reloaded on-the-fly without a reboot.  If false or not-specified,
@@ -53,7 +52,7 @@ jenkins:
                             gitHubPullRequestDiscovery {
                               strategyId 1
                             }
-                            localBranchTrait
+                            localBranchTrait()
                           }
                         }
                       }
