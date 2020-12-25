@@ -8,22 +8,29 @@ CI/CD for all IskPrinter components
 
 1. Install the ingress resource and Jenkins to the cluster via helm.
     ```
-    helm dependency update ./helm
-    helm install jenkins ./helm \
-        --kube-context '<context>' \
-        -n iskprinter \
-        --set githubToken='<github-token>' \
-        --set host='<host>' \
-        --set jenkins.controller.adminPassword='<admin-password>' \
-        --set jenkins.controller.jenkinsUriPrefix='<jenkins-uri-prefix>' \
-        --set jenkins.controller.jenkinsUrl='<jenkins-url>'
+    ./deploy.sh \
+        --kube-context=<kube-context> \
+        --namespace=<namespace> \
+        --github-username=<github-username> \
+        --github-token=<github-token> \
+        --host=<host> \
+        --jenkins-uri-prefix=<jenkins-uri-prefix> \
+        --admin-password=<admin-password>
     ```
     Example values for local deployment:
-    * host='localhost'
-    * jenkins.controller.jenkinsUriPrefix='/jenkins'
-    * jenkins.controller.jenkinsUrl='http://localhost/jenkins'
+    * `--kube-context='docker-desktop'`
+    * `--namespace='iskprinter'`
+    * `--github-username='CameronHudson8'`
+    * `--github-token='some-token'`
+    * `--host='localhost'`
+    * `--jenkins-uri-prefix='jenkins'`
+    * `--admin-password='some-password'`
 
-    Example values for cloud deployment:
-    * host='iskprinter.com'
-    * jenkins.controller.jenkinsUriPrefix='/jenkins'
-    * jenkins.controller.jenkinsUrl='https://iskprinter.com/jenkins'
+    Example values for production deployment:`
+    * `--kube-context='gcp-cameronhudson8'`
+    * `--namespace='iskprinter'`
+    * `--github-username='CameronHudson8'`
+    * `--github-token='some-token'`
+    * `--host='iskprinter.com'`
+    * `--jenkins-uri-prefix='jenkins'`
+    * `--admin-password='some-password'`
