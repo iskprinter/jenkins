@@ -1,11 +1,12 @@
 jenkins:
   controller:
+    imagePullPolicy: IfNotPresent
     installPlugins:
       - kubernetes:1.27.6
       - workflow-aggregator:2.6
       - configuration-as-code:1.46
       - job-dsl:1.77
-      # For GitHub integration
+      - kubernetes-credentials-provider:0.15
       - blueocean:1.24.3  # For GitHub integration
     sidecars:
       configAutoReload:
@@ -19,29 +20,19 @@ jenkins:
 
     JCasC:
       configScripts:
-        job-definitions: |
+        job-settings: |
           jobs:
             - script: >
                 multibranchPipelineJob('api') {
                   description 'Web endpoints and business logic'
-                  properties {
-                    folderPropertyImpl  {
-                      user 'admin'
-                      id 'github'
-                      domain {
-                        name 'blueocean-folder-credential-domain'
-                        description 'Blue Ocean Folder Credentials domain'
-                      }
-                    }
-                  }
                   branchSources {
                     branchSource {
                       source {
                         github {
-                          id 'blueocean'
                           apiUri 'https://api.github.com'
-                          configuredByUrl false
-                          credentialsId 'github'
+                          configuredByUrl true
+                          credentialsId 'github-username-and-token'
+                          id 'main'
                           repoOwner 'iskprinter'
                           repository 'api'
                           repositoryUrl 'https://github.com/iskprinter/api.git'
@@ -51,6 +42,9 @@ jenkins:
                             }
                             gitHubPullRequestDiscovery {
                               strategyId 1
+                            }
+                            headRegexFilter {
+                              regex '^main$|^PR-\\d+$'
                             }
                             localBranchTrait()
                           }
@@ -64,15 +58,12 @@ jenkins:
                     }
                   }
                 }
-    
+        unclassified-settings: |
+          unclassified:
+            gitHubPluginConfig:
+              configs:
+              - credentialsId: "github-token"
+                name: "GitHub"
+              hookUrl: https://iskprinter.com/jenkins/github-webhook/
   persistence:
     enabled: false
-    # volumes:
-    #   - name: jenkins-github
-    #     secret:
-    #       secretName: jenkins-github
-    # mounts:
-    #   - name: jenkins-github
-    #     mountPath: /run/secrets/github_token
-    #     subPath: github_token
-    #     readOnly: true
