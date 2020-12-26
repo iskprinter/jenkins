@@ -1,5 +1,7 @@
 jenkins:
   controller:
+    image: jenkins/jenkins
+    tag: 2.263.1-lts-jdk11
     imagePullPolicy: IfNotPresent
     installPlugins:
       - kubernetes:1.27.6
@@ -16,7 +18,11 @@ jenkins:
         enabled: false
     probes:
       startupProbe:
-        failureThreshold: 30
+        failureThreshold: 30  # x 10 periodSeconds = 300 s = 5 minutes
+      livenessProbe:
+        initialDelaySeconds: 60
+      readinessProbe:
+        initialDelaySeconds: 60
 
     JCasC:
       configScripts:
