@@ -30,11 +30,8 @@ for i in "$@"; do
         --jenkins-uri-prefix=*)
         JENKINS_URI_PREFIX="${i#*=}"
         ;;
-        --namespace=*)
-        NAMESPACE="${i#*=}"
-        ;;
         *)
-            other_args+=("$i")
+        other_args+=("$i")
         ;;
     esac
     shift
@@ -53,7 +50,7 @@ fi
 
 helm "$deploy_command" jenkins ./helm \
     --kube-context "$KUBE_CONTEXT" \
-    -n "$NAMESPACE" \
+    -n iskprinter \
     --set "dockerhubToken=${DOCKERHUB_TOKEN}" \
     --set "dockerhubUsername=${DOCKERHUB_USERNAME}" \
     --set "githubToken=${GITHUB_TOKEN}" \
