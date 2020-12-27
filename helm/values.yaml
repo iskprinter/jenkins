@@ -64,6 +64,7 @@ jenkins:
                     }
                   }
                 }
+            - script: >
                 multibranchPipelineJob('helm') {
                   description 'Helm chart for all application components'
                   branchSources {
