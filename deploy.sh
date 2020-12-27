@@ -62,4 +62,4 @@ helm "$deploy_command" "$RELEASE_NAME" ./helm \
     --set "jenkins.controller.adminPassword=${ADMIN_PASSWORD}" \
     --set "jenkins.controller.jenkinsUriPrefix=/${JENKINS_URI_PREFIX}" \
     --set "jenkins.controller.jenkinsUrl=${protocol}://${HOST}/${JENKINS_URI_PREFIX}" \
-    "${other_args[@]}"
+    $(if [ -n "${other_args[@]}" ]; then echo "${other_args[@]}"; fi)
