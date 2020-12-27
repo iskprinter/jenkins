@@ -12,6 +12,12 @@ for i in "$@"; do
         --admin-password=*)
         ADMIN_PASSWORD="${i#*=}"
         ;;
+        --eve-app-client-id=*)
+        EVE_APP_CLIENT_ID="${i#*=}"
+        ;;
+        --eve-app-client-secret=*)
+        EVE_APP_CLIENT_SECRET="${i#*=}"
+        ;;
         --dockerhub-token=*)
         DOCKERHUB_TOKEN="${i#*=}"
         ;;
@@ -54,6 +60,8 @@ fi
 helm "$deploy_command" "$RELEASE_NAME" ./helm \
     --kube-context "$KUBE_CONTEXT" \
     -n "$NAMESPACE" \
+    --set "eveAppClientId=${EVE_APP_CLIENT_ID}" \
+    --set "eveAppClientSecret=${EVE_APP_CLIENT_SECRET}" \
     --set "dockerhubToken=${DOCKERHUB_TOKEN}" \
     --set "dockerhubUsername=${DOCKERHUB_USERNAME}" \
     --set "githubToken=${GITHUB_TOKEN}" \
