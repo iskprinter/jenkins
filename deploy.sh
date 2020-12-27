@@ -3,6 +3,7 @@
 set -euo pipefail
 
 NAMESPACE='iskprinter'
+RELEASE_NAME='jenkins'
 
 other_args=()
 
@@ -45,12 +46,12 @@ if [ "$HOST" = 'localhost' ]; then
 fi
 
 deploy_command='upgrade'
-if ! helm status jenkins --kube-context "$KUBE_CONTEXT" -n "$NAMESPACE" &>/dev/null; then
+if ! helm status "$RELEASE_NAME" --kube-context "$KUBE_CONTEXT" -n "$NAMESPACE" &>/dev/null; then
     deploy_command='install'
     helm dependency update ./helm
 fi
 
-helm "$deploy_command" jenkins ./helm \
+helm "$deploy_command" "$RELEASE_NAME" ./helm \
     --kube-context "$KUBE_CONTEXT" \
     -n "$NAMESPACE" \
     --set "dockerhubToken=${DOCKERHUB_TOKEN}" \
