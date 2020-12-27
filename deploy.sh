@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+NAMESPACE='iskprinter'
+
 other_args=()
 
 for i in "$@"; do
@@ -50,7 +52,7 @@ fi
 
 helm "$deploy_command" jenkins ./helm \
     --kube-context "$KUBE_CONTEXT" \
-    -n iskprinter \
+    -n "$NAMESPACE" \
     --set "dockerhubToken=${DOCKERHUB_TOKEN}" \
     --set "dockerhubUsername=${DOCKERHUB_USERNAME}" \
     --set "githubToken=${GITHUB_TOKEN}" \
