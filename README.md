@@ -10,7 +10,6 @@ CI/CD for all IskPrinter components
     ```
     ./deploy.sh \
         --kube-context=<kube-context> \
-        --namespace=<namespace> \
         --dockerhub-username=<dockerhub-username> \
         --dockerhub-token=<dockerhub-token> \
         --github-username=<github-username> \
@@ -21,7 +20,6 @@ CI/CD for all IskPrinter components
     ```
     Example values for local deployment:
     * `--kube-context='docker-desktop'`
-    * `--namespace='iskprinter'`
     * `--dockerhub-username='cameronhudson8'`
     * `--dockerhub-token='some-token'`
     * `--github-username='CameronHudson8'`
@@ -32,7 +30,6 @@ CI/CD for all IskPrinter components
 
     Example values for production deployment:`
     * `--kube-context='gcp-cameronhudson8'`
-    * `--namespace='iskprinter'`
     * `--dockerhub-username='cameronhudson8'`
     * `--dockerhub-token='some-token'`
     * `--github-username='CameronHudson8'`
