@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+other_args=()
+
 for i in "$@"; do
     case $i in
         --admin-password=*)
@@ -32,8 +34,7 @@ for i in "$@"; do
         NAMESPACE="${i#*=}"
         ;;
         *)
-            echo "Error: Unrecognized option '${i}'." >&2
-            exit 1
+            other_args+=("$i")
         ;;
     esac
     shift
@@ -60,4 +61,5 @@ helm "$deploy_command" jenkins ./helm \
     --set "host=${HOST}" \
     --set "jenkins.controller.adminPassword=${ADMIN_PASSWORD}" \
     --set "jenkins.controller.jenkinsUriPrefix=/${JENKINS_URI_PREFIX}" \
-    --set "jenkins.controller.jenkinsUrl=${protocol}://${HOST}/${JENKINS_URI_PREFIX}"
+    --set "jenkins.controller.jenkinsUrl=${protocol}://${HOST}/${JENKINS_URI_PREFIX}" \
+    "${other_args[@]}"
