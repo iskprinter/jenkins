@@ -7,6 +7,12 @@ for i in "$@"; do
         --admin-password=*)
         ADMIN_PASSWORD="${i#*=}"
         ;;
+        --dockerhub-token=*)
+        DOCKERHUB_TOKEN="${i#*=}"
+        ;;
+        --dockerhub-username=*)
+        DOCKERHUB_USERNAME="${i#*=}"
+        ;;
         --kube-context=*)
         KUBE_CONTEXT="${i#*=}"
         ;;
@@ -47,6 +53,8 @@ fi
 helm "$deploy_command" jenkins ./helm \
     --kube-context "$KUBE_CONTEXT" \
     -n "$NAMESPACE" \
+    --set "dockerhubToken=${DOCKERHUB_TOKEN}" \
+    --set "dockerhubUsername=${DOCKERHUB_USERNAME}" \
     --set "githubToken=${GITHUB_TOKEN}" \
     --set "githubUsername=${GITHUB_USERNAME}" \
     --set "host=${HOST}" \

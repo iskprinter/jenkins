@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  username: {{ required "Argument --set dockerhubUsername='<dockerhub-username>' is required." .Values.dockerhubUsername | b64enc }}
+  token: {{ required "Argument --set dockerhubToken='<dockerhub-token>' is required." .Values.dockerhubToken | b64enc }}
+kind: Secret
+metadata:
+  annotations:
+    "jenkins.io/credentials-description": "DockerHub username and token"
+    "jenkins.io/credentials-keybinding-username": "username"
+    "jenkins.io/credentials-keybinding-password" : "token"
+  labels:
+    "jenkins.io/credentials-type": "usernamePassword"
+  name: dockerhub-username-and-token
+type: Opaque
