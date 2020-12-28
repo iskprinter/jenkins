@@ -39,6 +39,9 @@ for i in "$@"; do
         --jenkins-uri-prefix=*)
         JENKINS_URI_PREFIX="${i#*=}"
         ;;
+        --mongo-initdb-root-password=*)
+        MONGO_INITDB_ROOT_PASSWORD="${i#*=}"
+        ;;
         *)
         other_args+=("$i")
         ;;
@@ -60,14 +63,14 @@ fi
 helm "$deploy_command" "$RELEASE_NAME" ./helm \
     --kube-context "$KUBE_CONTEXT" \
     -n "$NAMESPACE" \
-    --set "eveAppClientId=${EVE_APP_CLIENT_ID}" \
-    --set "eveAppClientSecret=${EVE_APP_CLIENT_SECRET}" \
     --set "dockerhubToken=${DOCKERHUB_TOKEN}" \
     --set "dockerhubUsername=${DOCKERHUB_USERNAME}" \
+    --set "eveAppClientId=${EVE_APP_CLIENT_ID}" \
+    --set "eveAppClientSecret=${EVE_APP_CLIENT_SECRET}" \
     --set "githubToken=${GITHUB_TOKEN}" \
     --set "githubUsername=${GITHUB_USERNAME}" \
     --set "host=${HOST}" \
     --set "jenkins.controller.adminPassword=${ADMIN_PASSWORD}" \
     --set "jenkins.controller.jenkinsUriPrefix=/${JENKINS_URI_PREFIX}" \
     --set "jenkins.controller.jenkinsUrl=${protocol}://${HOST}/${JENKINS_URI_PREFIX}" \
-    $(if [ -n "${other_args[@]}" ]; then echo "${other_args[@]}"; fi)
+    --set "mongoInitdbRootPassword=${MONGO_INITDB_ROOT_PASSWORD}" \
