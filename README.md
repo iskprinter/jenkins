@@ -18,7 +18,8 @@ CI/CD for all IskPrinter components
         --github-token=<github-token> \
         --github-username=<github-username> \
         --host=<host> \
-        --jenkins-uri-prefix=<jenkins-uri-prefix>
+        --jenkins-uri-prefix=<jenkins-uri-prefix> \
+        --mongo-initdb-root-password=<mongo-initdb-root-password>
     ```
     Example values for local deployment:
     * `--kube-context='docker-desktop'`
@@ -31,6 +32,7 @@ CI/CD for all IskPrinter components
     * `--github-username='CameronHudson8'`
     * `--host='localhost'`
     * `--jenkins-uri-prefix='jenkins'`
+    * `--mongo-initdb-root-password='some-password'`
 
     Example values for production deployment:`
     * `--kube-context='gcp-cameronhudson8'`
@@ -43,3 +45,4 @@ CI/CD for all IskPrinter components
     * `--github-username='CameronHudson8'`
     * `--host='iskprinter.com'`
     * `--jenkins-uri-prefix='jenkins'`
+    * `--mongo-initdb-root-password='some-password'`
