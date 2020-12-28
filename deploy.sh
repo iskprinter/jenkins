@@ -74,3 +74,4 @@ helm "$deploy_command" "$RELEASE_NAME" ./helm \
     --set "jenkins.controller.jenkinsUriPrefix=/${JENKINS_URI_PREFIX}" \
     --set "jenkins.controller.jenkinsUrl=${protocol}://${HOST}/${JENKINS_URI_PREFIX}" \
     --set "mongoInitdbRootPassword=${MONGO_INITDB_ROOT_PASSWORD}" \
+    $(if [ ${#other_args[@]} -gt 0 ]; then echo "${other_args[@]}"; fi)
