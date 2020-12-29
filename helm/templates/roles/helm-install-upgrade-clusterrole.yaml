@@ -15,13 +15,16 @@ rules:
   resources:
   - services
   verbs:
+  - create
   - get
 - apiGroups:
   - apps
   resources:
   - deployments
   verbs:
+  - create
   - get
+  - patch
 - apiGroups:
   - apps
   resources:
@@ -34,6 +37,7 @@ rules:
   resources:
   - ingresses
   verbs:
+  - create
   - get
   - patch
 - apiGroups:
