@@ -36,6 +36,7 @@ rules:
   resources:
   - ingresses
   verbs:
+  - create
   - get
   - patch
 - apiGroups:
