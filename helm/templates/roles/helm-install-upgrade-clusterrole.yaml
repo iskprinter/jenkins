@@ -15,6 +15,7 @@ rules:
   resources:
   - services
   verbs:
+  - create
   - get
 - apiGroups:
   - apps
