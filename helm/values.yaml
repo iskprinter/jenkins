@@ -4,12 +4,14 @@ jenkins:
     tag: 2.263.1-lts-jdk11
     imagePullPolicy: IfNotPresent
     installPlugins:
-      - kubernetes:1.27.6
-      - workflow-aggregator:2.6
+      - blueocean:1.24.3  # For GitHub integration
+      - cobertura:1.16
       - configuration-as-code:1.46
+      - embeddable-build-status:2.0.3
       - job-dsl:1.77
       - kubernetes-credentials-provider:0.15
-      - blueocean:1.24.3  # For GitHub integration
+      - kubernetes:1.27.6
+      - workflow-aggregator:2.6
     sidecars:
       configAutoReload:
         # If enabled: true, Jenkins Configuration as Code will be reloaded on-the-fly without a reboot.  If false or not-specified,
