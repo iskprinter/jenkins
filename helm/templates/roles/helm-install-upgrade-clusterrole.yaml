@@ -52,4 +52,5 @@ rules:
   resources:
   - cronjobs
   verbs:
+  - create
   - get
