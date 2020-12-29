@@ -36,3 +36,9 @@ rules:
   verbs:
   - get
   - patch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get

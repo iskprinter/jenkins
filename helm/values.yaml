@@ -106,7 +106,42 @@ jenkins:
                     }
                   }
                 }
-
+            - script: >
+                multibranchPipelineJob('frontend') {
+                  description 'Browser client'
+                  branchSources {
+                    branchSource {
+                      source {
+                        github {
+                          apiUri 'https://api.github.com'
+                          configuredByUrl true
+                          credentialsId 'github-username-and-token'
+                          id 'main'
+                          repoOwner 'iskprinter'
+                          repository 'frontend'
+                          repositoryUrl 'https://github.com/iskprinter/frontend.git'
+                          traits {
+                            gitHubBranchDiscovery {
+                              strategyId 3
+                            }
+                            gitHubPullRequestDiscovery {
+                              strategyId 1
+                            }
+                            headRegexFilter {
+                              regex '^main$|^PR-\\d+$'
+                            }
+                            localBranchTrait()
+                          }
+                        }
+                      }
+                    }
+                  }
+                  factory {
+                    workflowBranchProjectFactory {
+                      scriptPath 'Jenkinsfile'
+                    }
+                  }
+                }
         unclassified-settings: |
           unclassified:
             gitHubPluginConfig:
