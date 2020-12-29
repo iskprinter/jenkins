@@ -47,3 +47,9 @@ rules:
   verbs:
   - create
   - get
+- apiGroups:
+  - "batch"
+  resources:
+  - cronjobs
+  verbs:
+  - get
