@@ -142,6 +142,42 @@ jenkins:
                     }
                   }
                 }
+            - script: >
+                multibranchPipelineJob('weekly-download') {
+                  description 'A weekly sync of low-frequency eve online data'
+                  branchSources {
+                    branchSource {
+                      source {
+                        github {
+                          apiUri 'https://api.github.com'
+                          configuredByUrl true
+                          credentialsId 'github-username-and-token'
+                          id 'main'
+                          repoOwner 'iskprinter'
+                          repository 'weekly-download'
+                          repositoryUrl 'https://github.com/iskprinter/weekly-download.git'
+                          traits {
+                            gitHubBranchDiscovery {
+                              strategyId 3
+                            }
+                            gitHubPullRequestDiscovery {
+                              strategyId 1
+                            }
+                            headRegexFilter {
+                              regex '^main$|^PR-\\d+$'
+                            }
+                            localBranchTrait()
+                          }
+                        }
+                      }
+                    }
+                  }
+                  factory {
+                    workflowBranchProjectFactory {
+                      scriptPath 'Jenkinsfile'
+                    }
+                  }
+                }
         unclassified-settings: |
           unclassified:
             gitHubPluginConfig:
