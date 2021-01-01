@@ -47,6 +47,7 @@ rules:
   verbs:
   - create
   - get
+  - patch
 - apiGroups:
   - "batch"
   resources:
