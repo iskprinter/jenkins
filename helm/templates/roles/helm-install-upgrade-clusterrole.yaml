@@ -55,3 +55,4 @@ rules:
   verbs:
   - create
   - get
+  - patch
