@@ -1,7 +1,7 @@
 jenkins:
   controller:
     image: jenkins/jenkins
-    tag: 2.263.1-lts-jdk11
+    tag: 2.263.2-lts-jdk11
     imagePullPolicy: IfNotPresent
     installPlugins:
       - blueocean:1.24.3  # For GitHub integration
