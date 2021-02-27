@@ -6,8 +6,8 @@ jenkins:
     installPlugins:
       - blueocean:1.24.3  # For GitHub integration
       - cobertura:1.16
-      - code-coverage-api:1.2.0
-      - configuration-as-code:1.46
+      - code-coverage-api:1.3.1
+      - configuration-as-code:1.47
       - embeddable-build-status:2.0.3
       - job-dsl:1.77
       - kubernetes-credentials-provider:0.15
