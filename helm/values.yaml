@@ -1,17 +1,19 @@
 jenkins:
   controller:
     image: jenkins/jenkins
-    tag: 2.263.2-lts-jdk11
+    tag: 2.281-jdk11
     imagePullPolicy: IfNotPresent
     installPlugins:
-      - blueocean:1.24.3  # For GitHub integration
+      - blueocean:1.24.4  # For GitHub integration
       - cobertura:1.16
       - code-coverage-api:1.3.1
       - configuration-as-code:1.47
+      - dark-theme:0.0.12
       - embeddable-build-status:2.0.3
       - job-dsl:1.77
-      - kubernetes-credentials-provider:0.15
-      - kubernetes:1.27.6
+      - kubernetes-credentials-provider:0.16
+      - kubernetes:1.29.1
+      - theme-manager:0.6
       - workflow-aggregator:2.6
     sidecars:
       configAutoReload:
@@ -185,5 +187,8 @@ jenkins:
               - credentialsId: "github-token"
                 name: "GitHub"
               hookUrl: https://iskprinter.com/jenkins/github-webhook/
+            themeManager:
+              disableUserThemes: true
+              theme: "darkSystem"
   persistence:
     enabled: false
