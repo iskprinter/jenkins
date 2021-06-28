@@ -60,6 +60,7 @@ if ! helm status "$RELEASE_NAME" --kube-context "$KUBE_CONTEXT" -n "$NAMESPACE" 
     helm dependency update ./helm
 fi
 
+helm dependency update ./helm
 helm "$deploy_command" "$RELEASE_NAME" ./helm \
     --kube-context "$KUBE_CONTEXT" \
     -n "$NAMESPACE" \

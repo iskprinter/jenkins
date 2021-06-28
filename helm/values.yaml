@@ -1,33 +1,20 @@
 jenkins:
   controller:
-    image: jenkins/jenkins
-    tag: 2.281-jdk11
     imagePullPolicy: IfNotPresent
     installPlugins:
-      - blueocean:1.24.4  # For GitHub integration
+      # Default plugins for this helm chart version
+      - kubernetes:1.29.4
+      - workflow-aggregator:2.6
+      - git:4.7.1
+      - configuration-as-code:1.51
+
+      # Additional plugins
+      - blueocean:1.24.7  # Includes GitHub plugin
       - cobertura:1.16
-      - code-coverage-api:1.3.2
-      - configuration-as-code:1.50
-      - dark-theme:0.0.12
       - embeddable-build-status:2.0.3
       - job-dsl:1.77
-      - kubernetes-credentials-provider:0.16
-      - kubernetes:1.29.1
+      - kubernetes-credentials-provider:0.20
       - theme-manager:0.6
-      - workflow-aggregator:2.6
-    sidecars:
-      configAutoReload:
-        # If enabled: true, Jenkins Configuration as Code will be reloaded on-the-fly without a reboot.  If false or not-specified,
-        # jcasc changes will cause a reboot and will only be applied at the subsequent start-up.  Auto-reload uses the
-        # http://<jenkins_url>/reload-configuration-as-code endpoint to reapply config when changes to the configScripts are detected.
-        enabled: false
-    probes:
-      startupProbe:
-        failureThreshold: 30  # x 10 periodSeconds = 300 s = 5 minutes
-      livenessProbe:
-        initialDelaySeconds: 60
-      readinessProbe:
-        initialDelaySeconds: 60
 
     JCasC:
       authorizationStrategy: |-
@@ -190,5 +177,3 @@ jenkins:
             themeManager:
               disableUserThemes: true
               theme: "darkSystem"
-  persistence:
-    enabled: false
